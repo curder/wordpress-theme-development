@@ -22,6 +22,7 @@ add_action('admin_menu', 'sunset_add_admin_page');
 
 function sunset_custom_settings()
 {
+    register_setting('sunset-settings-group', 'profile_picture');
     register_setting('sunset-settings-group', 'first_name');
     register_setting('sunset-settings-group', 'last_name');
     register_setting('sunset-settings-group', 'user_description');
@@ -31,6 +32,7 @@ function sunset_custom_settings()
 
     add_settings_section('sunset-sidebar-options', '侧边栏选项配置', 'sunset_sidebar_options', 'alecaddd_sunset');
 
+    add_settings_field('sidebar-profile-picture', '个人图片', 'sunset_sidebar_profile_picture', 'alecaddd_sunset', 'sunset-sidebar-options');
     add_settings_field('sidebar-name', '全名', 'sunset_sidebar_name', 'alecaddd_sunset', 'sunset-sidebar-options');
     add_settings_field('sidebar-description', '描述', 'sunset_sidebar_description', 'alecaddd_sunset', 'sunset-sidebar-options');
     add_settings_field('sidebar-twitter', 'Twitter用户', 'sunset_sidebar_twitter', 'alecaddd_sunset', 'sunset-sidebar-options');
@@ -42,6 +44,12 @@ function sunset_custom_settings()
 function sunset_sidebar_options()
 {
     echo '侧边栏的自定义配置';
+}
+
+function sunset_sidebar_profile_picture()
+{
+    $profilePicture = esc_attr(get_option('profile_picture'));
+    echo sprintf('<input type="button" value="上传个人图片" id="upload_button"><input type="hidden" name="profile_picture" value="%s" id="profile_picture" />', $profilePicture);
 }
 
 function sunset_sidebar_name()
