@@ -2,7 +2,7 @@
 /**
  * @package sunsettheme
  * ===============================
- * Admin Page
+ * ADMIN PAGE
  * ===============================
  */
 function sunset_add_admin_page()
@@ -24,6 +24,7 @@ function sunset_custom_settings()
 {
     register_setting('sunset-settings-group', 'first_name');
     register_setting('sunset-settings-group', 'last_name');
+    register_setting('sunset-settings-group', 'user_description');
     register_setting('sunset-settings-group', 'twitter_handler', 'sunset_sanitize_twitter_handler');
     register_setting('sunset-settings-group', 'facebook_handler');
     register_setting('sunset-settings-group', 'google_plus_handler');
@@ -31,6 +32,7 @@ function sunset_custom_settings()
     add_settings_section('sunset-sidebar-options', '侧边栏选项配置', 'sunset_sidebar_options', 'alecaddd_sunset');
 
     add_settings_field('sidebar-name', '全名', 'sunset_sidebar_name', 'alecaddd_sunset', 'sunset-sidebar-options');
+    add_settings_field('sidebar-description', '描述', 'sunset_sidebar_description', 'alecaddd_sunset', 'sunset-sidebar-options');
     add_settings_field('sidebar-twitter', 'Twitter用户', 'sunset_sidebar_twitter', 'alecaddd_sunset', 'sunset-sidebar-options');
     add_settings_field('sidebar-facebook', 'Facebook用户', 'sunset_sidebar_facebook', 'alecaddd_sunset', 'sunset-sidebar-options');
     add_settings_field('sidebar-google-plus', 'Google+用户', 'sunset_sidebar_google_plus', 'alecaddd_sunset', 'sunset-sidebar-options');
@@ -47,6 +49,12 @@ function sunset_sidebar_name()
     $firstName = esc_attr(get_option('first_name'));
     $lastName = esc_attr(get_option('last_name'));
     echo sprintf('<input type="text" name="first_name" value="%s" placeholder="姓" />', $firstName), sprintf('<input type="text" name="last_name" value="%s" placeholder="名" />', $lastName);
+}
+
+function sunset_sidebar_description()
+{
+    $description = esc_attr(get_option('user_description'));
+    echo sprintf('<input type="text" name="user_description" value="%s" placeholder="简单描述" /><p class="description">书写一些个人的简要描述</p>', $description);
 }
 
 function sunset_sidebar_twitter()
