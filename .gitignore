@@ -7,3 +7,6 @@
 *.iml
 out
 gen
+
+# config file
+wp-config.php
