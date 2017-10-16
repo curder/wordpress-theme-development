@@ -26,5 +26,5 @@ $description = esc_attr( get_option( 'user_description' ) );
 <form action="options.php" method="post" class="sunset-general-form">
 	<?php settings_fields( 'sunset-settings-group' ); ?>
 	<?php do_settings_sections( 'alecaddd_sunset' ); ?>
-	<?php submit_button(); ?>
+	<?php submit_button('保存更改','primary','btnSubmit'); ?>
 </form>

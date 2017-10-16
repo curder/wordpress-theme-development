@@ -2,7 +2,7 @@
 
 这是一个WordPress构建的项目DEMO，[参考视频](https://www.youtube.com/watch?v=ViZLtFIcSfo&list=PLriKzYyLb28kpEnFFi9_vJWPf5-_7d3rX)
 
-进行中...[Next Video](https://www.youtube.com/watch?v=a8GwPJjGCO8&list=PLriKzYyLb28kpEnFFi9_vJWPf5-_7d3rX&index=10)
+进行中...[Next Video](https://www.youtube.com/watch?v=v1UvKtGMm3A&list=PLriKzYyLb28kpEnFFi9_vJWPf5-_7d3rX&t=1)
 
 ## 安装
 

@@ -40,16 +40,16 @@ function sunset_custom_settings() {
 	add_settings_field( 'sidebar-google-plus', 'Google+用户', 'sunset_sidebar_google_plus', 'alecaddd_sunset', 'sunset-sidebar-options' );
 
 	// Theme Support Options
-	register_setting( 'sunset-theme-support', 'post_formats', 'sunset_post_formats_callback' );
+	register_setting( 'sunset-theme-support', 'post_formats' );
+	register_setting( 'sunset-theme-support', 'custom_header' );
+	register_setting( 'sunset-theme-support', 'custom_background' );
 	add_settings_section( 'sunset-theme-options', '主题选项', 'sunset_theme_options', 'alecaddd_sunset_theme' );
 	add_settings_field( 'post-formats', '文章类型', 'sunset_post_formats', 'alecaddd_sunset_theme', 'sunset-theme-options' );
+	add_settings_field( 'custom-header', '惯例头部', 'sunset_custom_header', 'alecaddd_sunset_theme', 'sunset-theme-options' );
+	add_settings_field( 'custom-background', '管理背景色', 'sunset_custom_background', 'alecaddd_sunset_theme', 'sunset-theme-options' );
 }
 
 // Post Formats Callback Functions
-function sunset_post_formats_callback( $input ) {
-	return $input;
-}
-
 function sunset_theme_options() {
 	echo '激活和停用特定的主题支持的选项';
 }
@@ -77,6 +77,18 @@ function sunset_post_formats() {
 	echo $output;
 }
 
+function sunset_custom_header() {
+	$options = get_option( 'custom_header' );
+	$checked = ( @$options == 1 ? 'checked' : '' );
+	echo '<label><input type="checkbox" id="custom_header" name="custom_header" value="1" ' . $checked . ' /> 启用惯例头部</label>';
+}
+
+function sunset_custom_background() {
+	$options = get_option( 'custom_background' );
+	$checked = ( @$options == 1 ? 'checked' : '' );
+	echo '<label><input type="checkbox" id="custom_background" name="custom_background" value="1" ' . $checked . ' /> 启用惯例背景色</label>';
+}
+
 // Sidebar Options Functions
 function sunset_sidebar_options() {
 	echo '侧边栏的自定义配置';
@@ -84,7 +96,11 @@ function sunset_sidebar_options() {
 
 function sunset_sidebar_profile_picture() {
 	$profilePicture = esc_attr( get_option( 'profile_picture' ) );
-	echo sprintf( '<input type="button" value="上传个人图片" id="upload_button"><input type="hidden" name="profile_picture" value="%s" id="profile_picture" />', $profilePicture );
+	if ( empty( $profilePicture ) ) {
+		echo '<input type="button" class="button button-secondary" value="上传个人图片" id="upload_button"><input type="hidden" name="profile_picture" value="" id="profile_picture" />';
+	} else {
+		echo sprintf( '<input type="button" class="button button-secondary" value="修改个人图片" id="upload_button"><input type="hidden" name="profile_picture" value="%s" id="profile_picture" /><input type="button" class="button button-secondary" value="删除" id="remove_profile_picture" />', $profilePicture );
+	}
 }
 
 function sunset_sidebar_name() {

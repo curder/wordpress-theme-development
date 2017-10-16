@@ -18,11 +18,21 @@ $formats = array(
 	'audio'   => '音频',
 	'chat'    => '聊天'
 );
-$output = array();
+$output  = array();
 foreach ( $formats as $key => $format ) {
 	$output[] = ( is_array( $options ) && array_key_exists( $key, $options ) ) ? $key : '';
 }
 
 if ( ! empty( $options ) ) {
 	add_theme_support( 'post-formats', $output );
+}
+
+$header = get_option( 'custom_header' );
+if ( $header && $header == 1 ) {
+	add_theme_support( 'custom-header' );
+}
+
+$background = get_option( 'custom_background' );
+if ( $background && $background == 1 ) {
+	add_theme_support( 'custom-background' );
 }
