@@ -2,11 +2,11 @@
 <?php settings_errors(); ?>
 
 <?php
-$picture = form_option('profile_picture');
-$firstName = form_option('first_name');
-$lastName = form_option('last_name');
-$fullName = $firstName . $lastName;
-$description = form_option('user_description');
+$picture     = esc_attr( get_option( 'profile_picture' ) );
+$firstName   = esc_attr( get_option( 'first_name' ) );
+$lastName    = esc_attr( get_option( 'last_name' ) );
+$fullName    = $firstName . $lastName;
+$description = esc_attr( get_option( 'user_description' ) );
 
 
 ?>
@@ -14,7 +14,8 @@ $description = form_option('user_description');
 <div class="sunset-sidebar-preview">
     <div class="sunset-sidebar">
         <div class="image-container">
-            <div id="profile-picture-preview" class="profile-picture" style="background-image: url('<?= $picture ?>')"></div>
+            <div id="profile-picture-preview" class="profile-picture"
+                 style="background-image: url('<?= $picture ?>')"></div>
         </div>
         <h1 class="sunset-username"><?= $fullName ?></h1>
         <h2 class="sunset-description"><?= $description ?></h2>
@@ -23,7 +24,7 @@ $description = form_option('user_description');
 </div>
 
 <form action="options.php" method="post" class="sunset-general-form">
-    <?php settings_fields('sunset-settings-group'); ?>
-    <?php do_settings_sections('alecaddd_sunset'); ?>
-    <?php submit_button(); ?>
+	<?php settings_fields( 'sunset-settings-group' ); ?>
+	<?php do_settings_sections( 'alecaddd_sunset' ); ?>
+	<?php submit_button(); ?>
 </form>
