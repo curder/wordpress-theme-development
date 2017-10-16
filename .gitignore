@@ -10,3 +10,5 @@ gen
 
 # config file
 wp-config.php
+
+wp-content/uploads/*
