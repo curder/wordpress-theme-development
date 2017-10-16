@@ -1,12 +1,12 @@
-<h1>主题选项</h1>
+<h1>Sunset侧边栏设置</h1>
 <?php settings_errors(); ?>
 
 <?php
-$picture = esc_attr(get_option('profile_picture'));
-$firstName = esc_attr(get_option('first_name'));
-$lastName = esc_attr(get_option('last_name'));
+$picture = form_option('profile_picture');
+$firstName = form_option('first_name');
+$lastName = form_option('last_name');
 $fullName = $firstName . $lastName;
-$description = esc_attr(get_option('user_description'));
+$description = form_option('user_description');
 
 
 ?>
