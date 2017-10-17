@@ -12,6 +12,7 @@ function sunset_add_admin_page() {
 	// Generate Sunset Admin Sub Pages.
 	add_submenu_page( 'alecaddd_sunset', 'Sunset Sidebar Options', '侧边栏', 'manage_options', 'alecaddd_sunset', 'sunset_theme_create_page' );
 	add_submenu_page( 'alecaddd_sunset', 'Sunset Theme Options', '主题设置', 'manage_options', 'alecaddd_sunset_theme', 'sunset_theme_support_page' );
+	add_submenu_page( 'alecaddd_sunset', 'Sunset Contact Form', '联系表单', 'manage_options', 'alecaddd_sunset_theme_contact', 'sunset_contact_form_page' );
 	add_submenu_page( 'alecaddd_sunset', 'Sunset CSS Options', 'Custom CSS', 'manage_options', 'alecaddd_sunset_css', 'sunset_theme_settings_page' );
 
 	// Activate custom settings
@@ -47,6 +48,22 @@ function sunset_custom_settings() {
 	add_settings_field( 'post-formats', '文章类型', 'sunset_post_formats', 'alecaddd_sunset_theme', 'sunset-theme-options' );
 	add_settings_field( 'custom-header', '惯例头部', 'sunset_custom_header', 'alecaddd_sunset_theme', 'sunset-theme-options' );
 	add_settings_field( 'custom-background', '管理背景色', 'sunset_custom_background', 'alecaddd_sunset_theme', 'sunset-theme-options' );
+
+	// Concat Form Options
+	register_setting( 'sunset-contact-options', 'activate_contact' );
+	add_settings_section( 'sunset-contact-section', '联系我们', 'sunset_contact_section', 'alecaddd_sunset_theme_contact' );
+	add_settings_field( 'activate-form', '启用表单', 'sunset_activate_contact', 'alecaddd_sunset_theme_contact', 'sunset-contact-section' );
+}
+
+// Contact Form Callback Functions
+function sunset_contact_section() {
+	echo '激活和停用联系我们表单选项';
+}
+
+function sunset_activate_contact() {
+	$options = get_option( 'activate_contact' );
+	$checked = ( @$options == 1 ? 'checked' : '' );
+	echo '<label><input type="checkbox" id="activate_contact" name="activate_contact" value="1" ' . $checked . ' /> </label>';
 }
 
 // Post Formats Callback Functions
@@ -144,6 +161,11 @@ function sunset_theme_create_page() {
 
 function sunset_theme_settings_page() {
 	echo '<h1>Sunset Custom CSS</h1>';
+}
+
+function sunset_contact_form_page() {
+	require_once get_template_directory() . '/inc/templates/sunset-contact-from.php';
+
 }
 
 function sunset_theme_support_page() {
