@@ -2,7 +2,7 @@
 
 这是一个WordPress构建的项目DEMO，[参考视频](https://www.youtube.com/watch?v=ViZLtFIcSfo&list=PLriKzYyLb28kpEnFFi9_vJWPf5-_7d3rX)
 
-进行中...[Create a Premium WordPress Theme - 13](https://www.youtube.com/watch?v=ccbImB59JXQ&list=PLriKzYyLb28kpEnFFi9_vJWPf5-_7d3rX&t=3)
+进行中...[Create a Premium WordPress Theme - 13](https://www.youtube.com/watch?v=MkfrFK6vrWY&list=PLriKzYyLb28kpEnFFi9_vJWPf5-_7d3rX&index=14)
 
 ## 安装
 
