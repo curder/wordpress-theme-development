@@ -2,13 +2,12 @@
 
 这是一个WordPress构建的项目DEMO，[参考视频](https://www.youtube.com/watch?v=ViZLtFIcSfo&list=PLriKzYyLb28kpEnFFi9_vJWPf5-_7d3rX)
 
-进行中...[Create a Premium WordPress Theme - 13](https://www.youtube.com/watch?v=MkfrFK6vrWY&list=PLriKzYyLb28kpEnFFi9_vJWPf5-_7d3rX&index=14)
+进行中...[Create a Premium WordPress Theme - 14](https://www.youtube.com/watch?v=-_Hdjh0iPyU&list=PLriKzYyLb28kpEnFFi9_vJWPf5-_7d3rX&t=15)
 
 ## 安装
 
 ```
 git clone git@github.com:curder/wordpress-theme-development.git
-cp wp-config-sample.php wp-config.php
 ```
 
 ## 配置

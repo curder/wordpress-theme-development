@@ -7,13 +7,13 @@
  */
 function sunset_add_admin_page() {
 	// Generate Sunset Admin Page.
-	add_menu_page( 'Sunset Theme Options', 'Sunset主题设置', 'manage_options', 'alecaddd_sunset', 'sunset_theme_create_page', get_template_directory_uri() . '/images/sunset-icon.png', 110 );
+	add_menu_page( 'Sunset Theme Options', 'sunset', 'manage_options', 'alecaddd_sunset', 'sunset_theme_create_page', get_template_directory_uri() . '/images/sunset-icon.png', 110 );
 
 	// Generate Sunset Admin Sub Pages.
 	add_submenu_page( 'alecaddd_sunset', 'Sunset Sidebar Options', '侧边栏', 'manage_options', 'alecaddd_sunset', 'sunset_theme_create_page' );
 	add_submenu_page( 'alecaddd_sunset', 'Sunset Theme Options', '主题设置', 'manage_options', 'alecaddd_sunset_theme', 'sunset_theme_support_page' );
 	add_submenu_page( 'alecaddd_sunset', 'Sunset Contact Form', '联系表单', 'manage_options', 'alecaddd_sunset_theme_contact', 'sunset_contact_form_page' );
-	add_submenu_page( 'alecaddd_sunset', 'Sunset CSS Options', 'Custom CSS', 'manage_options', 'alecaddd_sunset_css', 'sunset_theme_settings_page' );
+	add_submenu_page( 'alecaddd_sunset', 'Sunset CSS Options', '主题样式', 'manage_options', 'alecaddd_sunset_css', 'sunset_theme_settings_page' );
 
 	// Activate custom settings
 	add_action( 'admin_init', 'sunset_custom_settings' );
@@ -53,7 +53,37 @@ function sunset_custom_settings() {
 	register_setting( 'sunset-contact-options', 'activate_contact' );
 	add_settings_section( 'sunset-contact-section', '联系我们', 'sunset_contact_section', 'alecaddd_sunset_theme_contact' );
 	add_settings_field( 'activate-form', '启用表单', 'sunset_activate_contact', 'alecaddd_sunset_theme_contact', 'sunset-contact-section' );
+
+	// Custom Css Options
+	register_setting( 'sunset-custom-css-options', 'sunset_css', 'sunset_sanitize_custom_css' );
+	add_settings_section( 'sunset-custom-css-section', '主题样式', 'sunset_custom_css_section_callback', 'alecaddd_sunset_css' );
+	add_settings_field( 'custom-css', '输入主题样式', 'sunset_custom_css_callback', 'alecaddd_sunset_css', 'sunset-custom-css-section' );
 }
+
+// Custom Css Callback Functions
+function sunset_custom_css_section_callback() {
+	return '输入您的自定义CSS样式';
+}
+
+
+function sunset_custom_css_callback() {
+	$css = get_option( 'sunset_css' );
+	$css = ( empty( $css ) ? '/* Sunset主题样式 */' : $css );
+	echo '<div id="customCss">' . $css . '</div><textarea id="sunset_css" name="sunset_css" style="display:none;visibility:hidden;">' . $css . '</textarea>';
+}
+
+/**
+ * 处理CSS输入
+ *
+ * @param $input
+ *
+ * @return string
+ */
+function sunset_sanitize_custom_css( $input ) {
+	$output = esc_textarea( $input );
+	return $output;
+}
+
 
 // Contact Form Callback Functions
 function sunset_contact_section() {
@@ -89,7 +119,7 @@ function sunset_post_formats() {
 	$output  = '';
 	foreach ( $formats as $key => $format ) {
 		$checked = ( is_array( $options ) && array_key_exists( $key, $options ) ) ? 'checked' : '';
-		$output  .= sprintf( '<label><input type="checkbox" id="%s" name="%s[%s]" value="1" %s>%s</label><br/>', $format, 'post_formats', $key, $checked, $format );
+		$output .= sprintf( '<label><input type="checkbox" id="%s" name="%s[%s]" value="1" %s>%s</label><br/>', $format, 'post_formats', $key, $checked, $format );
 	}
 	echo $output;
 }
@@ -160,7 +190,7 @@ function sunset_theme_create_page() {
 }
 
 function sunset_theme_settings_page() {
-	echo '<h1>Sunset Custom CSS</h1>';
+	require_once get_template_directory() . '/inc/templates/sunset-custom-css.php';
 }
 
 function sunset_contact_form_page() {
